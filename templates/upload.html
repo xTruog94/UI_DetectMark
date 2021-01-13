@@ -1,0 +1,34 @@
+<html>  
+<head>  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+</style>
+</head>  
+<body>  
+<!-- about -->
+<div class="content">
+
+
+   <div class="loading">
+   <div class='upload'>Đã upload xong file {{file}} 
+   <a href='/process'class='process'>
+      <button action = "{{ url_for('process') }}" class="btn">Xử lý đi</button>
+    <a>
+   </div>
+   </div>
+   </div>
+   </body>
+   </html>
