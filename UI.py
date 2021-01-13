@@ -7,9 +7,9 @@ from flask_dropzone import Dropzone
 app = Flask(__name__)
 dropzone = Dropzone(app)
 
-UPLOAD_FOLDER='E:/20201/flask_calculator_app/input/'
+UPLOAD_FOLDER='E:/20201/UI_DetectMark/input/'
 filename=''
-output_dir='E:/20201/flask_calculator_app/output/'
+output_dir='E:/20201/UI_DetectMark/output/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Dropzone settings
 app.config['DROPZONE_UPLOAD_MULTIPLE'] = True
@@ -36,7 +36,8 @@ def process():
     try:
         finish = False
         run()
-        return render_template('process.html',finish=True)
+        return render_template('process.html', finish=True)
+        
     except Exception as e:
         print(e)
         return render_template('error.html')

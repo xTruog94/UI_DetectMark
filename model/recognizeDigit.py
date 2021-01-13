@@ -50,6 +50,7 @@ def recognizeDigit(cnnModel, digit_location):
     results = np.argmax(results,axis = 1)
     ketqua = [results[0], accuracy[0]]
     # results = pd.Series(result,name="Label")
+
     return ketqua
 
 def run():
@@ -134,6 +135,8 @@ def run():
                 sh.write(stt, 3, 'check')
             print("Ket qua: %s,%s (%s)" %(digit1[0], digit2[0], digit1[1]))
             stt += 1
+        
         output_path='./output/' + output_filename
         book.save(output_path)
+    os.remove(inputdir+'/'+filelist[0])
         
