@@ -20,15 +20,16 @@
 <body>  
 <!-- about -->
 <div class="content">
-
-<p>processing</p>
+<h1>
+processing</h1>
 </div>
 
 {% if  finish==True %}
 
    <div>
-      <p>Đã xử lý xong {{file}}. Tải xuống để xem!</p>
-      <a href='/download'class='process'>
+      <h1>Đã xử lý xong {{file}}. Tải xuống để xem!</h1>
+      </div>
+      <div><a href='/download'class='process'>
          <button action ="{{ url_for('download') }}" class="btn"><i class="fa fa-download"></i> Download</button>
       </a>
    </div>
