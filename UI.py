@@ -7,7 +7,7 @@ from flask_dropzone import Dropzone
 app = Flask(__name__)
 dropzone = Dropzone(app)
 
-UPLOAD_FOLDER='E:/20201/UI_DetectMark/input/'
+UPLOAD_FOLDER = 'E:/20201/UI_DetectMark/input/'
 filename=''
 output_dir='E:/20201/UI_DetectMark/output/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -17,7 +17,7 @@ app.config['DROPZONE_ALLOWED_FILE_CUSTOM'] = True
 app.config['DROPZONE_ALLOWED_FILE_TYPE'] = 'image/*'
 app.config['DROPZONE_REDIRECT_VIEW'] = 'home'
 @app.route('/') 
-def home():  
+def home():
     return render_template("index.html")
 @app.route('/upload',methods=['GET','POST'])  
 def upload():
@@ -27,12 +27,13 @@ def upload():
     file_path = UPLOAD_FOLDER + f.filename
     filename = f.filename
     f.save(file_path)
-    print(filename)
     return render_template('upload.html', upload=True,file=f.filename)
-    
+@app.route('/check_upload', methods=['GET', 'POST'])
+def check_upload():
+    file_check = None
+    return render_template("index.html",file_check=True)   
 @app.route('/process', methods=['GET', 'POST'])
 def process():
-
     try:
         finish = False
         run()

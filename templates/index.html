@@ -6,13 +6,10 @@
 
 
 {% block form %}
- 
-    <form action = "{{ url_for('upload') }}" method = "post" enctype="multipart/form-data">  
-        <input type="file" name="file" id='file'/>  
+<form action = "{{ url_for('upload') }}" method = "post" enctype="multipart/form-data">
+        <input type="file" accept=" .jpg, .jpeg, .png"name="file" id='file'/>
         <input type = "submit" value="Upload">
-
-    </form>  
-    {{ dropzone.create(action_view='home') }}
+        </form>     
 {% endblock  %}
 
 

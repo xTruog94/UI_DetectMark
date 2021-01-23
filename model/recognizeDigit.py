@@ -7,7 +7,7 @@ import os
 from keras.models import model_from_json
 from .processData import processData
 from .cropDigit import getDigit1, getDigit2
-
+from .detect_code import DetectCode
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
@@ -52,23 +52,38 @@ def recognizeDigit(cnnModel, digit_location):
     # results = pd.Series(result,name="Label")
 
     return ketqua
-
+def recognizeCode():
+    inputdir = './input'
+    for file_ in os.listdir(inputdir):
+        detect_code = DetectCode(inputdir, file_)
+        code = detect_code.detect_code()
+        if code == '':
+            return 0
+        else:
+            return code
 def run():
     print("--> running")
     model = reStoreModel()
-    
     inputdir = "./input"
     outputdir = "./output1"
     filelist = os.listdir(inputdir)
+
+
+    book = xlwt.Workbook()
+    sh = book.add_sheet("Sheet 1",cell_overwrite_ok=True)
+    sh.write(0, 0, 'Ma lop thi')
     
+    code = recognizeCode()
+    sh.write(1, 0, code)
+    if code == 0:
+        sh.write(1, 0, 'Cant recognize')
+    stt = 3    
     for name in filelist:
-        book = xlwt.Workbook()
-        sh = book.add_sheet("Sheet 1")
-        sh.write(0, 0, 'STT')
-        sh.write(0, 1, 'Diem')
-        sh.write(0, 2, 'Do chinh xac')
-        sh.write(0, 3, 'Check?')
-        stt = 1
+        sh.write(stt, 0, 'STT')
+        sh.write(stt, 1, 'Diem')
+        sh.write(stt, 2, 'Do chinh xac')
+        sh.write(stt, 3, 'Check?')
+        
         print("processing " + name)
         direction = './input/' + name
         output_filename = name + "_result.xls"
@@ -131,11 +146,10 @@ def run():
             sh.write(stt, 0, stt)
             sh.write(stt, 1, str(str(digit1[0]) + ',' + str(digit2[0])))
             sh.write(stt, 2, str(round(digit1[1], 4)))
-            if digit1[1] < 0.5:
+            if digit1[1] < 0.6:
                 sh.write(stt, 3, 'check')
-            print("Ket qua: %s,%s (%s)" %(digit1[0], digit2[0], digit1[1]))
             stt += 1
-        
+            
         output_path='./output/' + output_filename
         book.save(output_path)
     os.remove(inputdir+'/'+filelist[0])
