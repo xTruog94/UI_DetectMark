@@ -37,7 +37,9 @@ def process():
     try:
         finish = False
         run()
-        return render_template('process.html', finish=True)
+        global filename
+        file_name = filename + '_result.xls'
+        return render_template('process.html', finish=True,file=filename)
         
     except Exception as e:
         print(e)
@@ -47,9 +49,8 @@ def process():
 def download():
     global filename
     file_name = filename + '_result.xls'
-    print(file_name)
     return send_from_directory(directory=output_dir
-    ,filename= file_name)
+    ,file= file_name,as_attachment=True)
 
 if __name__ == '__main__':  
     app.run(debug = True)  

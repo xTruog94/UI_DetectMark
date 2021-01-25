@@ -1,0 +1,8 @@
+numpy
+pytesseract
+scikit-learn
+sklearn
+torch
+PIL
+Werkzeug
+flash

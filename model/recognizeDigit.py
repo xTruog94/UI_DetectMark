@@ -143,12 +143,12 @@ def run():
                 digit2 = recognizeDigit(model, digit2_location)
                 if digit2[0] != 5:
                     digit2[0] = 0
-            sh.write(index, 0, stt-2)
+            stt += 1
+            sh.write(stt, 0, stt-3)
             sh.write(stt, 1, str(str(digit1[0]) + ',' + str(digit2[0])))
             sh.write(stt, 2, str(round(digit1[1], 4)))
             if digit1[1] < 0.6:
                 sh.write(stt, 3, 'check')
-            stt += 1
             
         output_path='./output/' + output_filename
         book.save(output_path)
