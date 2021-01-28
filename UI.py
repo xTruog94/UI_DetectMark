@@ -7,9 +7,9 @@ from flask_dropzone import Dropzone
 app = Flask(__name__)
 dropzone = Dropzone(app)
 
-UPLOAD_FOLDER = 'E:/20201/UI_DetectMark/input/'
+UPLOAD_FOLDER = './input/'
 filename=''
-output_dir='E:/20201/UI_DetectMark/output/'
+output_dir='./output/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Dropzone settings
 app.config['DROPZONE_UPLOAD_MULTIPLE'] = True
@@ -48,9 +48,11 @@ def process():
 @app.route('/download', methods=['GET','POST'])
 def download():
     global filename
+    print(filename)
     file_name = filename + '_result.xls'
+
     return send_from_directory(directory=output_dir
-    ,file= file_name,as_attachment=True)
+    ,filename= file_name,as_attachment=True)
 
 if __name__ == '__main__':  
-    app.run(debug = True)  
+    app.run(debug = True, port=5501)  
